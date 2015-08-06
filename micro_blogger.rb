@@ -8,6 +8,23 @@ class MicroBlogger
 		@client = JumpstartAuth.twitter
 	end
 	
+	def run
+		puts "Welcome to the JSL Twitter Client!"
+		command = ""
+		while command != "q"
+			printf "enter command: "
+			input = gets.chomp
+			parts = input.split(" ")
+			command = parts[0]
+			case command
+				when 'q' then puts "Goodbye!"
+				when 't' then tweet(parts[1..-1].join(" "))
+			else
+				puts "Sorry, I don't know how to #{command}"
+			end
+		end
+	end
+
 	def tweet(message)
 		if message.length > 140
 			puts "Sua mensagem é muito longa"
@@ -20,5 +37,4 @@ class MicroBlogger
 end
 
 blogger = MicroBlogger.new
-blogger.tweet("1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 1234567890 1234567890
-	1234567890 1234567890")	
+blogger.run
